@@ -1,4 +1,5 @@
 src/shared/config/conf.json
+.idea
 
 # dependencies
 /node_modules
