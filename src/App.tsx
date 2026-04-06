@@ -16,7 +16,7 @@ export default function App() {
 					<MainMenu/>
 					<Main/>
 				</Stack>
-				<footer>GastroBudget v. 1.0</footer>
+				<footer>GastroBudget v. 1.1</footer>
 			</div>
 		</BrowserRouter>
 	);

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useGastroStorage} from "../../storage/GastroBudgetStorage";
 import {Button, FormControl, Stack} from "react-bootstrap";
 import {EventMeal} from "../../types/Event";
@@ -23,6 +23,24 @@ export default function EventMealControl({eventMeal, onChange, onDelete}: EventM
 			}
 		},
 		[eventMeal]
+	);
+
+	const costPerServing = useMemo(
+		() => NumberUtil.round(meal ? meal.costPerServing : 0, 2),
+		[meal]
+	);
+
+	const profitPerServing = useMemo(
+		() => NumberUtil.round(eventMeal.sellingPrice - costPerServing, 2),
+		[eventMeal, costPerServing]
+	);
+
+	const profitabilityPerServing = useMemo(
+		() => {
+			if (eventMeal.sellingPrice === 0) return 0;
+			return NumberUtil.round(profitPerServing / eventMeal.sellingPrice, 2) * 100
+		},
+		[eventMeal, profitPerServing]
 	);
 
 	return <tr>
@@ -66,9 +84,9 @@ export default function EventMealControl({eventMeal, onChange, onDelete}: EventM
 				<div>Kč</div>
 			</Stack>
 		</td>
-		<td className="money">{NumberUtil.round(eventMeal.sellingPrice - (meal ? meal.costPerServing : 0), 2)} Kč</td>
-		<td className="money">{NumberUtil.round((1 - (meal ? meal.costPerServing : 0) / eventMeal.sellingPrice) * 100, 0)} %</td>
-		<td className="money">{NumberUtil.round(eventMeal.servings * (eventMeal.sellingPrice - (meal ? meal.costPerServing : 0)), 0)} Kč</td>
+		<td className="money">{profitPerServing} Kč</td>
+		<td className="money">{profitabilityPerServing} %</td>
+		<td className="money">{NumberUtil.round(eventMeal.servings * profitPerServing)} Kč</td>
 		<td>
 			<Button onClick={onDelete} variant="danger" size="sm">smazat</Button>
 		</td>
