@@ -1,0 +1,14 @@
+services:
+  deploy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./ansible:/ansible
+      - ../build:/build
+      - ${SSH_PRIVATE_KEY_FILE}:/var/ansible-ssh-key
+    working_dir: /ansible
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

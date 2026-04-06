@@ -1,0 +1,20 @@
+- name: Deploy or update Gastrobudget
+  hosts: all
+  become: no
+  vars:
+    ansible_ssh_private_key_file: "/var/ansible-ssh-key"
+    build_dir: "/build"
+
+  tasks:
+    - name: Ensure rsync is installed
+      apt:
+        name: rsync
+        state: present
+      become: yes
+    - name: Sync application files to remote host
+      synchronize:
+        src: "{{ build_dir }}/"
+        dest: "{{ target_dir }}/"
+        delete: true
+        recursive: true
+        mode: push

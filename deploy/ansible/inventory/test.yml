@@ -1,0 +1,6 @@
+test:
+  hosts:
+    test.zavadil.eu:
+  vars:
+    target_dir: /opt/gastrobudget
+    domain: gastrobudget.zavadil.eu
