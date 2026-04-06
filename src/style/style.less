@@ -1,0 +1,78 @@
+/**
+	Styles common for the whole Merch Master project.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800&display=swap');
+
+:root {
+	--brand-color: #226c5e;
+	--brand-color-contrast: #fff;
+	--brand-color-secondary: darkorange;
+	--brand-color-secondary-contrast: #fff;
+
+
+	--font-family: "M PLUS Rounded 1c";
+	--weight-light: 400;
+	--weight-medium: 500;
+	--weight-bold: 800;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	font-weight: var(--weight-medium);
+	font-size: 12pt;
+}
+
+strong, .strong, h1, h2, h3, h4 {
+	font-weight: var(--weight-bold);
+	font-family: var(--font-family), "Arial Rounded MT Bold", Arial, sans-serif;
+}
+
+.light, small {
+	font-weight: var(--weight-light);
+}
+
+.brand-color, h1, h2, h3, h4 {
+	color: var(--brand-color);
+}
+
+a {
+	font-weight: var(--weight-medium);
+	color: var(--brand-color);
+}
+
+a:hover {
+	text-decoration: none;
+	color: var(--brand-color-secondary);
+}
+
+a:active, a.active {
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+}
+
+header {
+	text-align: center;
+	padding: 1rem;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+/* FORMS */
+
+form label, .form-label {
+	font-weight: var(--weight-light);
+	margin: 0;
+	font-size: .85em;
+}
+
+/* TABLES */
+
+.money {
+	text-align: right;
+}
