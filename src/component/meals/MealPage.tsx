@@ -93,6 +93,7 @@ export default function MealPage() {
 			/>
 		</Form>
 		<h2>Přísady</h2>
+		<div>Na jednu porci.</div>
 
 		{
 			editing.ingredients.length > 0 &&
@@ -100,7 +101,8 @@ export default function MealPage() {
 				<thead>
 				<tr>
 					<th>Přísada</th>
-					<th>Množství na 1 porci</th>
+					<th>Množství</th>
+					<th>Náklady</th>
 					<th></th>
 				</tr>
 				</thead>

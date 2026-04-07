@@ -97,7 +97,7 @@ export default function IngredientsPage() {
 							>
 								<td>{ingredient.name}</td>
 								<td>{ingredient.packageSize} <UnitLabel unitId={ingredient.unitId}/></td>
-								<td>{ingredient.costPerPackage} Kč</td>
+								<td className="money">{ingredient.costPerPackage} Kč</td>
 							</tr>
 				)
 			}

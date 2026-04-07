@@ -1,10 +1,11 @@
 import {MealIngredient} from "../../types/Meal";
 import IngredientSelect from "../ingredients/IngredientSelect";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Ingredient} from "../../types/Ingredient";
 import {useGastroStorage} from "../../storage/GastroBudgetStorage";
 import {Button, FormControl, Stack} from "react-bootstrap";
 import UnitLabel from "../units/UnitLabel";
+import {NumberUtil} from "zavadil-ts-common";
 
 export type MealIngredientProps = {
 	mealIngredient: MealIngredient;
@@ -22,6 +23,14 @@ export default function MealIngredientControl({mealIngredient, onChange, onDelet
 				storage.ingredients.loadById(mealIngredient.ingredientId).then(setIngredient);
 		},
 		[mealIngredient]
+	);
+
+	const ingredientCost = useMemo(
+		() => {
+			if (!ingredient) return 0;
+			return (ingredient.costPerPackage / ingredient.packageSize) * mealIngredient.unitsPerServing;
+		},
+		[ingredient, mealIngredient]
 	);
 
 	return <tr>
@@ -50,6 +59,9 @@ export default function MealIngredientControl({mealIngredient, onChange, onDelet
 				/>
 				<UnitLabel unitId={ingredient?.unitId}/>
 			</Stack>
+		</td>
+		<td className="money">
+			{NumberUtil.round(ingredientCost, 2)} Kč
 		</td>
 		<td>
 			<Button onClick={onDelete} variant="danger" size="sm">smazat</Button>

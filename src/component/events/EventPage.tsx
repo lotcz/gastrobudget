@@ -1,5 +1,5 @@
 import {useGastroStorage} from "../../storage/GastroBudgetStorage";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {Button, Form, Spinner, Stack, Table} from "react-bootstrap";
 import {FormRowControl} from "zavadil-react-common";
 import {useNavigate, useParams} from "react-router";
@@ -188,6 +188,14 @@ export default function EventPage() {
 			if (editing) storage.events.save(editing).then(() => navigate('/events'));
 		},
 		[storage, editing]
+	);
+
+	const breakEven = useMemo(
+		() => {
+			if (!editing) return 0;
+			return (editing.totalCost / editing.totalRevenue) * 100;
+		},
+		[editing]
 	);
 
 	if (!editing) return <Spinner/>
@@ -396,6 +404,10 @@ export default function EventPage() {
 		</div>
 
 		<h2>Zisk</h2>
+
+		<div>
+			Pro pokrytí nákladů je třeba prodat alespoň <strong>{NumberUtil.round(breakEven, 2)} %</strong> porcí.
+		</div>
 
 		<div>
 			Celkový zisk při prodeji 25% porcí: <strong>{NumberUtil.round((0.25 * editing.totalRevenue) - editing.totalCost)} Kč</strong>
