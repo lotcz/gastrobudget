@@ -375,8 +375,8 @@ export default function EventPage() {
 							<td>{si.ingredient.name}</td>
 							<td>{si.requiredUnits} <UnitLabel unitId={si.ingredient.unitId}/></td>
 							<td><strong>{si.requiredPackages}</strong> x {si.ingredient.packageSize} <UnitLabel unitId={si.ingredient.unitId}/></td>
-							<td className="money">{si.ingredient.costPerPackage} Kč</td>
-							<td className="money">{si.cost} Kč</td>
+							<td className="money">{NumberUtil.round(si.ingredient.costPerPackage, 2)} Kč</td>
+							<td className="money">{NumberUtil.round(si.cost, 2)} Kč</td>
 						</tr>
 					)
 				}

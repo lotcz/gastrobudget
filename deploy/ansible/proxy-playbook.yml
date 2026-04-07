@@ -13,8 +13,11 @@
               listen 80;
               server_name {{ domain }};
 
+              root {{ target_dir }};
+              index index.html;
+          
               location / {
-                  root {{ target_dir }};
+                try_files $uri $uri/ /index.html;
               }
           }
 

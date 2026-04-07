@@ -4,6 +4,7 @@ import "./style/style.less";
 import Main from "./Main";
 import {Stack} from "react-bootstrap";
 import MainMenu from "./MainMenu";
+import pack from "../package.json";
 
 export default function App() {
 	return (
@@ -16,7 +17,7 @@ export default function App() {
 					<MainMenu/>
 					<Main/>
 				</Stack>
-				<footer>GastroBudget v. 1.1</footer>
+				<footer>GastroBudget v. {pack.version}</footer>
 			</div>
 		</BrowserRouter>
 	);
